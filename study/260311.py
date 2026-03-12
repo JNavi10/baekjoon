@@ -1,60 +1,44 @@
 
 
-def solve_new_min_max(new_arr = [1,2,3], old_arr = [4,5,6]):
-    solved_min_arr: list[int] = []
+def solve_new_min_max(new_arr:list[int], old_arr:list[int]):
+    # 결과 배열: 연산 결과가 저장될 min 배열과 max 배열
+    solved_min_arr = []
     solved_max_arr = []
-    # j는  새 arr의 index
+
+    # j는 새 배열의 index
     for j in range(3):
-        new_min: int = 0
+        # 새 결과 배열에 들어갈
+        new_min = 0
         new_max = 0
+
+        # 첫번째 결과값은 무조건 저장하기 위한 첫번째 결과값 식별 변수
         min_first_iter = True
         max_first_iter = True
-        # k는 구 arr의 index
+
+        # k는 구 배열의 index
         for k in range(3):
-            # index 차이 2 이상이면 skip
+            # index 차이 2 이상이면 skip -, j,k: (0, 2), (2, 0) 걸러냄
             if abs(j-k) >= 2:
                 continue
-            # print(j,k)
-            # 각 j 와 가능한 k 값 결합
-            #print(f"new_arr[{j}]={new_arr[j]}, old_arr[{k}]={old_arr[k]}")
+            
             new_min_j_k: int = new_arr[j] + old_arr[k]
-            # arr값 임시 갱신
+
+            # min, max 값만 필요하므로 값만 갱신
             if new_min > new_min_j_k or min_first_iter:
                 new_min = new_min_j_k
                 min_first_iter = False
             if new_max < new_min_j_k or max_first_iter:
                 new_max = new_min_j_k
                 max_first_iter = False
-        # arr값 영구 갱신
-        # print(f'min for {j} is {new_min}')
+
+        # 각 j 별로 계산한 값을 결과 배열에 저장
         solved_min_arr.append(new_min)
-        #print(f'max for {j} is {new_max}')
         solved_max_arr.append(new_max)
 
     return solved_min_arr, solved_max_arr
 
-"""
-arr1 = [2, 0, 0]
-arr2 = [4 ,1, 1]
-arr3 = [1, 2, 6]
-max_state = arr1
-#min_state, _ = solve_new_min_max(input_arr, min_state)
-_, max_state = solve_new_min_max(arr2, max_state)
-print(max_state) # 6, 2, 1
-_, max_state = solve_new_min_max(arr3, max_state)
-print(max_state) # 7, 8, 8
-#print(solve_new_min_max())
-
-
-exit(123)
-"""
 
 N = int(input())
-
-sum = 0
-
-min_state = [0, 0, 0]
-max_state = [0, 0, 0]
 
 # i 는 입력 arr의 i번째 줄
 for i in range(N):
@@ -64,12 +48,11 @@ for i in range(N):
         max_state = input_arr.copy()
         continue
     
-    # 새 input
+    # 새 줄 읽기
     input_arr = [int(x) for x in input().split()]
 
+    # min 과 max 배열은 계산 대상이 다르므로 따로 계산
     min_state, _ = solve_new_min_max(input_arr, min_state)
     _, max_state = solve_new_min_max(input_arr, max_state)
-
-    
 
 print(max(max_state), min(min_state))

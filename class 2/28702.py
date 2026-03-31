@@ -1,13 +1,22 @@
-li = [0]*4
-
-num_found = False
-for i in range(3):
+val = -1
+num_index = None
+for i, num in enumerate(range(3)):
     in_val = input()
 
-    if not num_found and in_val not in ['Fizz', 'Buzz', 'FizzBuzz']:
-        li[i] = int(in_val)
-        num_found = True
-    else:
-        li[i] = li[i-1] + 1
-last_num = li[3]
-mod3
+    if not num_index and in_val not in ['Fizz', 'Buzz', 'FizzBuzz']:
+        num_index = i
+        val = int(in_val)
+        break
+
+while i < 3:
+    i += 1
+    val += 1
+
+if val % 5 == 0 and val % 3 == 0:
+    print('FizzBuzz')
+elif val % 5 == 0:
+    print('Buzz')
+elif val % 3 == 0:
+    print('Fizz')
+else:
+    print(val)

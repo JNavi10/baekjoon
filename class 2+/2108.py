@@ -1,3 +1,7 @@
+import sys
+
+input = sys.stdin.readline
+
 N = int(input())
 
 li = []
@@ -11,10 +15,15 @@ for _ in range(N):
         di[temp] = 1
 
 # average
-print(sum(li)//N)
+print(round(sum(li)/N))
 
 # median
 print(sorted(li)[N//2])
 
 # mode
-sorted_dict = dict(sorted(di.items(), key=lambda item: item[1]))
+max_freq = max(di.values())
+modes = sorted([k for k, v in di.items() if v == max_freq])
+print(modes[1] if len(modes) > 1 else modes[0])
+
+# range
+print(max(li) - min(li))

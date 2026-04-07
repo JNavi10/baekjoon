@@ -1,4 +1,19 @@
 N = int(input())
 
-# 이전 행 개수 홀이면 무조건 짝수가 죽고
-# 이전 행 개수 짝이면 무조건 홀수가 죽음
+li: list = [i for i in range(1, N+1)]
+even_lives: bool = True
+
+while True:
+    if len(li) == 1:
+        break
+ 
+    if even_lives:  # 짝수면
+        subset = li[1::2]  # 짝수만 산다
+    else:
+        subset = li[0::2]
+
+    # even_lives 와 현재행의 짝수를 XNOR하면 다음 even_lives의 값이 됨
+    even_lives = even_lives ^ bool(len(li)%2)
+    li = subset
+
+print(li[0])

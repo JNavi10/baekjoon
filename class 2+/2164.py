@@ -12,7 +12,7 @@ while True:
     else:
         subset = li[0::2]
 
-    # even_lives 와 현재행의 짝수를 XNOR하면 다음 even_lives의 값이 됨
+    # even_lives 와 현재행의 홀수여부를 XOR하면 다음 even_lives의 값이 됨
     even_lives = even_lives ^ bool(len(li)%2)
     li = subset
 
